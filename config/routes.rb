@@ -9,6 +9,11 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
-  get '/about', to: 'pages#about'
-  get '/profile', to: 'pages#profile'
+  get '/about' => 'pages#about'
+  # get 'users/:id' => 'users#show'
+  resources :users, only: [:show, :update, :edit]
+  # get '/user/:id', to: 'pages#profile'
+  # get '/myprofile', to: 'pages#myprofile'
+  # get '/userinfo', to: 'pages#userinfo'
+  # post '/userinfo', to: 'pages#userinfo'
 end

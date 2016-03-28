@@ -1,0 +1,13 @@
+<div id="page_wrapper">
+  <%= form_for @user do |f| %>
+
+    <p>
+      <%= f.label :information %> <br>
+      <%= f.text_area  :information %>
+    </p>
+
+    <p>
+      <%= f.submit 'Save' %>
+    </p>
+  <% end %>
+</div>

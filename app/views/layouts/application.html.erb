@@ -10,7 +10,7 @@
   <div id="sidebar">
     <ul>
       <li class="category">Website</li>
-      <li><%= link_to "Profile", profile_path %></li>
+      <li><%= link_to "Profile", user_path(current_user.id) %></li>
       <li><%= link_to "The Wall", root_path %></li>
       <li><%= link_to "About", about_path %></li>
     </ul>
