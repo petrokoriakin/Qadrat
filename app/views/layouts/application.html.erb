@@ -10,7 +10,9 @@
   <div id="sidebar">
     <ul>
       <li class="category">Website</li>
-      <li><%= link_to "Profile", user_path(current_user.id) %></li>
+      <% if user_signed_in? %>
+        <li><%= link_to "Profile", user_path(current_user.id) %></li>
+      <% end %>
       <li><%= link_to "The Wall", root_path %></li>
       <li><%= link_to "About", about_path %></li>
     </ul>

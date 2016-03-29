@@ -1,7 +1,7 @@
 <div class="comment clearfix">
   <div class="comment_content">
     <p class="comment_name">
-      <strong><%= comment.name %></strong>
+      <strong><%= link_to "#{(User.find_by_id(comment.user_id)).username}", user_path(comment.user_id)  %></strong>
     </p>
     <p class="comment_body">
       <%= comment.body %>
@@ -12,9 +12,9 @@
   </div>
 
   <p>
-  <% if user_signed_in? %>
-    <%= link_to 'Delete', [comment.post, comment], method: :delete,
-          class: "button", data: {confirm: "Are you sure?"}%>
-  <% end %>
+    <% if user_signed_in? && comment.user_id == current_user.id %>
+      <%= link_to 'Delete', [comment.post, comment], method: :delete,
+            class: "button", data: {confirm: "Are you sure?"}%>
+    <% end %>
   </p>
 </div>
