@@ -1,4 +1,4 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, html: { multipart: true } do |f| %>
 
   <% if @post.errors.any? %>
     <div id="errors">
@@ -20,6 +20,10 @@
   <p>
     <%= f.label :body %><br>
     <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.label :image %> <br>
+    <%= f.file_field  :image %>
   </p>
   <p>
     <%= f.submit %>

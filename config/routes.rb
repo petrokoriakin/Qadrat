@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root "posts#index"
 
   get '/about' => 'pages#about'
+  get 'userposts/:id', to: 'posts#userposts', as: :userposts
   # get 'users/:id' => 'users#show'
   resources :users, only: [:show, :update, :edit]
   # get '/user/:id', to: 'pages#profile'

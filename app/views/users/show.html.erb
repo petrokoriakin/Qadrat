@@ -6,32 +6,39 @@
   <% end %>
   <hr />
   <p><strong>Email:</strong> <%= @user.email %></p>
+  <p>Show <%= @user.username %> <strong><%= link_to "posts", userposts_path(1) %></strong></p>
   <p>
     <strong>Information:</strong>
     <% if @user.information != nil %>
       <%= @user.information %>
-      <% if @user.id == current_user.id %>
+      <% if user_signed_in? && @user.id == current_user.id %>
         <p>
           <font color="#44ACB7">
-              <strong><%= link_to "Edit information", edit_user_path %></strong>
+              <strong><%= link_to "Edit profile.", edit_user_path %></strong>
           </font>
         </p>
       <% end %>
     <% else %>
       no information found.
-      <% if @user.id == current_user.id %>
+      <% if user_signed_in? && @user.id == current_user.id %>
         <p>
           <font color="#44ACB7">
-                <strong><%= link_to "Edit information.", edit_user_path %></strong>
+                <strong><%= link_to "Edit profile.", edit_user_path %></strong>
           </font>
         </p>
       <% end %>
     <% end %>
   </p>
-  <% if @user.id == current_user.id %>
+
+  <p>
+    <strong>Avatar:</strong> <br>
+    <%= image_tag @user.avatar.url(:medium) %>
+  </p>
+
+  <% if user_signed_in? && @user.id == current_user.id %>
     <p>
       <font color="#44ACB7">
-              <strong><%= link_to "Profile settings", edit_user_registration_path %></strong>
+              <strong><%= link_to "Change password", edit_user_registration_path %></strong>
       </font>
     </p>
   <% end %>

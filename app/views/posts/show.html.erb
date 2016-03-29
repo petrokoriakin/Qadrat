@@ -16,6 +16,10 @@
     <%= @post.body %>
   </p>
 
+  <% if @post.image.file? %>
+    <%= image_tag @post.image.url(:thumb) %>
+  <% end %>
+
   <div id="comments">
     <h2><%= @post.comments.count %> Comments</h2>
     <%= render @post.comments %>

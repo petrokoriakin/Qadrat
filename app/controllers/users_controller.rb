@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
-    if @user.update(params[:user].permit(:information))
+    if @user.update(user_params)
       redirect_to @user
     else
       render 'edit'
@@ -21,5 +21,10 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+  end
+
+ private
+  def user_params
+    params.require(:user).permit(:information, :username, :avatar)
   end
 end
