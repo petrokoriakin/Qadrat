@@ -6,7 +6,16 @@
   <% end %>
   <hr />
   <p><strong>Email:</strong> <%= @user.email %></p>
-  <p>Show <%= @user.username %> <strong><%= link_to "posts", userposts_path(1) %></strong></p>
+
+  <p>
+    <%= @user.username.capitalize %> has typed
+    <font color="#44ACB7">
+      <strong>
+        <%= link_to "#{@p_counter} posts.", userposts_path(@user.id) %>
+      </strong>
+    </font>
+  </p>
+
   <p>
     <strong>Information:</strong>
     <% if @user.information != nil %>
@@ -32,7 +41,7 @@
 
   <p>
     <strong>Avatar:</strong> <br>
-    <%= image_tag @user.avatar.url(:medium) %>
+    <%= image_tag @user.avatar.url(:small) %>
   </p>
 
   <% if user_signed_in? && @user.id == current_user.id %>

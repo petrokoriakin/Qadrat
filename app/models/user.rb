@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" },
-                    default_url: ->(attachment) { ActionController::Base.helpers.asset_path('missing2.png') }
+  has_attached_file :avatar, styles: { medium: "300x300>", small: "260x260>" },
+                    default_url: "missing_:style.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   devise :database_authenticatable, :registerable,

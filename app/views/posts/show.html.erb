@@ -17,7 +17,7 @@
   </p>
 
   <% if @post.image.file? %>
-    <%= image_tag @post.image.url(:thumb) %>
+    <%= image_tag @post.image.url(:medium) %>
   <% end %>
 
   <div id="comments">
