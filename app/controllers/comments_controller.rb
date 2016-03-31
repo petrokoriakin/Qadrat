@@ -10,6 +10,14 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
+    if @comment.update_attribute(:is_answer, true)
+      redirect_to @post
+    end
+  end
+
   def destroy
     @post = Post.find(params[:post_id])
     @comment = @post.comments.find(params[:id])
