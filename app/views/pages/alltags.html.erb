@@ -1,0 +1,4 @@
+<p>All tags</p>
+<% @alltags.map do |t| %>
+  <p><%= link_to t,  tag_path(t.name) %></p>
+<% end %>

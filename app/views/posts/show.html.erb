@@ -2,7 +2,6 @@
   <h1 class="title">
     <%= @post.title %>
   </h1>
-
   <p class="date">
     Submitted <%= time_ago_in_words(@post.created_at) %> ago by
     <strong><%= link_to "#{(User.find_by_id(@post.user_id)).username}", user_path(@post.user_id) %></strong>
