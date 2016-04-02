@@ -4,6 +4,18 @@ class PostsController < ApplicationController
     @posts = Post.all.order('created_at DESC')
   end
 
+  def withtag
+    if params[:tag]
+      @posts = Post.tagged_with(params[:tag]).order('created_at DESC')
+      @tagname = params[:tag]
+      @tag = Tag.find_by_name(params[:tag])
+    end
+  end
+
+  # def usernews
+  #   @posts = Post.tagged_with(current_user.following_tag_list).order('created_at DESC')
+  # end
+
   def userposts
     @user = User.find(params[:id])
     @posts = Post.where(user_id: @user.id).order('created_at DESC')
@@ -51,6 +63,6 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:title, :body, :image)
+      params.require(:post).permit(:title, :body, :image, :tag_list)
     end
 end

@@ -1,4 +1,17 @@
 <div class="post_wrapper">
+  <h3>
+    <strong>Tag: <%= @tagname %></strong>
+  </h3>
+
+  <% if user_signed_in? %>
+    <% if current_user.is_following(current_user.id, @tag.id) %>
+      <%= link_to "Unfollow", unfollow_tag_path(@tagname), method: :post %>
+    <% else %>
+      <%= link_to "Follow", follow_tag_path(@tagname), method: :post %>
+    <% end %>
+  <% end %>
+
+  <br>
   <% @posts.each do |post| %>
     <p>
       Tags: <%= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>

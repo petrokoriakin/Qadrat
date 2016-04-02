@@ -1,12 +1,36 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  has_many :posts, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   has_attached_file :avatar, styles: { medium: "300x300>", small: "260x260>" },
                     default_url: "missing_:style.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  has_many :subscriptions, dependent: :destroy
+  has_many :subscribed_tags, source: :tag, through: :subscriptions
+
+  def follow (id_of_tag)
+    subscriptions.create(tag_id: id_of_tag)
+  end
+
+  def unfollow (id_of_tag)
+    subscriptions.find_by(tag_id: id_of_tag).destroy
+  end
+
+  def is_following(id_of_user, id_of_tag)
+    is_sub = Subscription.find_by(user_id: id_of_user, tag_id: id_of_tag)
+    if is_sub
+      return true
+    else
+      return false
+    end
+  end
+
+  def following_tag_list
+    subscribed_tags.map(&:name)
+   # subscribed_tags.map(&:id)
+  end
 end
