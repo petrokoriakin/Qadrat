@@ -13,7 +13,18 @@ class PostsController < ApplicationController
   end
 
   def usernews
-    @posts = current_user.subscribed_tags.map { |tag| tag.posts }.uniq
+    @posts = []
+    allPosts = Post.all.order('created_at DESC')
+    userTags = current_user.subscribed_tags.map(&:name)
+    allPosts.each do |post|
+      postTags = post.tag_list.split(',')
+      userTags.each do |tag|
+        if postTags.include?(tag)
+          @posts.push(post)
+          break
+        end
+      end
+    end
   end
 
   def userposts

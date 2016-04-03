@@ -1,18 +1,15 @@
 <div class="post_wrapper">
-  <% @posts.each do |post_collection| %>
-    <% post_collection.each do |post| %>
-      <p>
-        Tags: <%= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
-      </p>
+  <% @posts.each do |post| %>
+    <p>
+      Tags: <%= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
+    </p>
 
-      <h2 class="title">
-        <%= link_to post.title, post %>
-      </h2>
+    <h2 class="title">
+      <%= link_to post.title, post %>
+    </h2>
 
-      <p class="date">
-        <%= post.created_at.strftime(" %B, %d, %Y") %>
-      </p>
-      <br>
-    <% end %>
+    <p class="date">
+      <%= post.created_at.strftime(" %B, %d, %Y") %>
+    </p><br>
   <% end %>
 </div>
