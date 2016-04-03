@@ -17,6 +17,14 @@
   </p>
 
   <p>
+    <strong>Subscribed on:
+      <font color="#44ACB7">
+        <%= raw current_user.subscribed_tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(' ') %>
+      </font>
+    </strong>
+  </p>
+
+  <p>
     <strong>Information:</strong>
     <% if @user.information != nil %>
       <%= @user.information %>
