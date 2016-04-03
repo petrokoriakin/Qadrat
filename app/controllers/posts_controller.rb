@@ -12,9 +12,9 @@ class PostsController < ApplicationController
     end
   end
 
-  # def usernews
-  #   @posts = Post.tagged_with(current_user.following_tag_list).order('created_at DESC')
-  # end
+  def usernews
+    @posts = current_user.subscribed_tags.map { |tag| tag.posts }.uniq
+  end
 
   def userposts
     @user = User.find(params[:id])

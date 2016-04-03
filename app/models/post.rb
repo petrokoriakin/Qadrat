@@ -26,8 +26,8 @@ class Post < ActiveRecord::Base
 
   def tag_list=(names)
     self.tags = names.split(",").map do |n|
-      # Tag.where(name: n.strip).first_or_create!
-      Tag.find_or_create_by_name(n.strip)
+      Tag.where(name: n.strip).first_or_create!
+     # Tag.find_or_create_by_name(n.strip)
     end
   end
 end
