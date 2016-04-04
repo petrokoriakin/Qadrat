@@ -33,4 +33,10 @@ class User < ActiveRecord::Base
     subscribed_tags.map(&:name)
    # subscribed_tags.map(&:id)
   end
+
+  ROLES = %w[admin moderator user]
+
+  def role?(requested_role)
+    self.role == requested_role.to_s
+  end
 end

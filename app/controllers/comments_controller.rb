@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  load_and_authorize_resource :nested => :article
 
   def create
     @post = Post.find(params[:post_id])

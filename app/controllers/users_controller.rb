@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def show
     if (User.find_by_id(params[:id]))
       @user = User.find(params[:id])
@@ -7,7 +6,6 @@ class UsersController < ApplicationController
     else
       redirect_to root_path, notice: "User not found!"
     end
-
   end
 
   def update

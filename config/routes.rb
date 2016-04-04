@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'subscriptions/follow_tag'
 
   get 'subscriptions/unfollow_tag'

@@ -1,7 +1,6 @@
 class SubscriptionsController < ApplicationController
 
   def follow_tag
-
     if params[:tag]
       @tag = Tag.find_by_name(params[:tag])
       if current_user.follow(@tag.id)
@@ -11,7 +10,6 @@ class SubscriptionsController < ApplicationController
   end
 
   def unfollow_tag
-
     if params[:tag]
       @tag = Tag.find_by_name(params[:tag])
       if current_user.unfollow(@tag.id)

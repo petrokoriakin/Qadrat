@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
 
-  has_many :taggings #, dependent: :destroy
+  has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
   def self.tagged_with(name)
@@ -27,7 +27,7 @@ class Post < ActiveRecord::Base
   def tag_list=(names)
     self.tags = names.split(",").map do |n|
       Tag.where(name: n.strip).first_or_create!
-     # Tag.find_or_create_by_name(n.strip)
+      # Tag.find_or_create_by_name(n.strip)
     end
   end
 end
