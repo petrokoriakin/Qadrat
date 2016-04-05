@@ -17,18 +17,22 @@
   </p>
 
   <p>
-    <strong>Subscribed on:
-      <font color="#44ACB7">
-        <%= raw current_user.subscribed_tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(' ') %>
-      </font>
-    </strong>
+    <% if @user.subscribed_tags.empty? %>
+      <strong>No Subscriptions found</strong>
+    <% else %>
+      <strong>Subscribed on:
+        <font color="#44ACB7">
+          <%= raw @user.subscribed_tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(' ') %>
+        </font>
+      </strong>
+    <% end -%>
   </p>
 
   <p>
     <strong>Information:</strong>
     <% if @user.information != nil %>
       <%= @user.information %>
-      <% if user_signed_in? && @user.id == current_user.id %>
+      <% if can? :update, @user %>
         <p>
           <font color="#44ACB7">
               <strong><%= link_to "Edit profile.", edit_user_path %></strong>
@@ -37,7 +41,7 @@
       <% end %>
     <% else %>
       no information found.
-      <% if user_signed_in? && @user.id == current_user.id %>
+      <% if can? :update, @user %>
         <p>
           <font color="#44ACB7">
                 <strong><%= link_to "Edit profile.", edit_user_path %></strong>
@@ -52,7 +56,7 @@
     <%= image_tag @user.avatar.url(:small) %>
   </p>
 
-  <% if user_signed_in? && @user.id == current_user.id %>
+  <% if can? :update, @user %>
     <p>
       <font color="#44ACB7">
               <strong><%= link_to "Change password", edit_user_registration_path %></strong>
