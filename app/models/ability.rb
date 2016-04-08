@@ -8,14 +8,16 @@ class Ability
             can :dashboard
             can :manage, :all
         elsif user && user.role?(:user)
-            can :read, :all
-            can :create, :all
+            can :create, [Post, Comment]
             can :update, Post, user_id: user.id
             can :update, User, id: user.id
             can [:update, :destroy], Comment, user_id: user.id
         elsif user && user.role?(:moderator)
-            can :manage, :all
-            can :read, :all
+            # can :manage, [Post, Comment]
+            can :manage, :usernews
+            # can :read, :newslist
+            can [:create, :update, :destroy], Post, Comment
         end
     end
 end
+

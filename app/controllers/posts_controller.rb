@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index, :show]
- # load_and_authorize_resource
+  before_action :authenticate_user!, except: [:index, :show, :userposts, :withtag]
+  load_and_authorize_resource except: [:userposts, :withtag, :usernews]
 
   def index
     @posts = Post.all.order('created_at DESC')
@@ -38,7 +38,7 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def create  # method to save data
+  def create
     @post = current_user.posts.build(post_params)
     @post.user_id = current_user.id
 

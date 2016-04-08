@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource
+  # load_and_authorize_resource
   def show
     if (User.find_by_id(params[:id]))
       @user = User.find(params[:id])
