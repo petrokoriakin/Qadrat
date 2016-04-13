@@ -1,15 +1,26 @@
 <% @posts.each do |post| %>
   <div class="col-md-4 text-center">
-      <div class="thumbnail">
-      <%= link_to (image_tag User.find_by_id(post.user_id).avatar.url(:small), class: 'img-rounded'), user_path(post.user_id) %>
-        <!-- <img class="img-responsive" src="http://placehold.it/750x450" alt=""> -->
-          <div class="caption">
-              <h4> <%= link_to post.title, post %><br> </h4>
-              <p>
-                Tags: <%= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ') %>
-              </p>
+        <div class="col s12 m7">
+          <div class="card">
+            <div class="card-content">
+              <p><%= link_to post.title, post %></p>
               <p><%= post.created_at.strftime(" %B, %d, %Y") %></p>
+            </div>
+            <div class="card-action">
+               <p>
+                Tags: <%= raw post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join('') %>
+              </p>
+            </div>
           </div>
-      </div>
+        </div>
   </div>
 <% end -%>
+
+<div class="fixed-action-btn horizontal" style="bottom: 90px; right: 24px;">
+    <a href="/posts/new" class="btn-floating btn-large red">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+</div>
+
+
+
