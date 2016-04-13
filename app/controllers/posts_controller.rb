@@ -6,6 +6,46 @@ class PostsController < ApplicationController
     @posts = Post.all.order('created_at DESC')
   end
 
+  def show
+    @post = Post.find(params[:id])
+  end
+
+  def new
+    @post = Post.new
+  end
+
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def create
+    @post = current_user.posts.build(post_params)
+    @post.user_id = current_user.id
+
+    if @post.save
+     redirect_to @post
+    else
+      render 'new'
+    end
+  end
+
+  def update
+    @post = Post.find(params[:id])
+
+    if @post.update(post_params)
+      redirect_to @post
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+
+    redirect_to root_path
+  end
+
   def withtag
     if params[:tag]
       @posts = Post.tagged_with(params[:tag]).order('created_at DESC')
@@ -32,46 +72,6 @@ class PostsController < ApplicationController
   def userposts
     @user = User.find(params[:id])
     @posts = Post.where(user_id: @user.id).order('created_at DESC')
-  end
-
-  def new
-    @post = Post.new
-  end
-
-  def create
-    @post = current_user.posts.build(post_params)
-    @post.user_id = current_user.id
-
-    if @post.save
-     redirect_to @post
-    else
-      render 'new'
-    end
-  end
-
-  def show
-    @post = Post.find(params[:id])
-  end
-
-  def edit
-    @post = Post.find(params[:id])
-  end
-
-  def update
-    @post = Post.find(params[:id])
-
-    if @post.update(post_params)
-      redirect_to @post
-    else
-      render 'edit'
-    end
-  end
-
-  def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-
-    redirect_to root_path
   end
 
   private

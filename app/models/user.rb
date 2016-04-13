@@ -2,9 +2,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :avatar, styles: { medium: "300x300>", small: "260x260>" },
+  has_attached_file :avatar, styles: { medium: "300x500>", small: "90x90#" },
                     default_url: "missing_:style.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  validates :username, uniqueness: { case_sensitive: true, message: "User with this name already exists." }
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy

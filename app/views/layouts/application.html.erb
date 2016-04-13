@@ -6,43 +6,52 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
+  <!--Import Google Icon Font-->
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
-  <div id="sidebar">
-    <ul>
-      <li class="category">Website</li>
-      <% if user_signed_in? %>
-        <li><%= link_to "Profile", user_path(current_user.id) %></li>
-        <li><%= link_to "My feed", myfeed_path %></li>
-      <% end %>
-      <li><%= link_to "The Wall", root_path %></li>
-      <li><%= link_to "About", about_path %></li>
-    </ul>
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <!-- <a href="#" class="brand-logo">Logo</a> -->
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <% if user_signed_in? %>
+            <li><%= link_to "New Post", new_post_path %></li>
+          <% end -%>
+          <% if !user_signed_in? %>
+            <li><%= link_to "The Wall", root_path %></li>
+          <% end -%>
+          <li><%= link_to "About", about_path %></li>
+          <% if user_signed_in? %>
+            <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "Log In", new_user_session_path, class: 'button' %></li>
+          <% end -%>
+        </ul>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+          <%if user_signed_in? %>
+            <li>
+            <a class="dropdown-button" href="#" data-activates="mydropdown">Profile<i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+          <% end -%>
+        </ul>
+        <% if user_signed_in? %>
+          <ul class="dropdown-content" id="mydropdown">
+            <li><%= link_to "Profile", user_path(current_user.id) %></li>
+            <li><%= link_to "My feed", myfeed_path %></li>
+            <li class="divider"></li>
+            <li><%= link_to "The Wall", root_path %></li>
+          </ul>
+        <% end -%>
+      </div>
+    </nav>
   </div>
-
-  <div id="main_content">
-    <div id="header">
-      <% if current_page?(root_path) %>
-        <p><strong>All Posts</strong></p>
-      <% elsif current_page?(about_path) %>
-        <p> <strong>About</strong></p>
-      <% else %>
-        <strong><%= link_to "Back to All Posts", root_path %></strong>
-      <% end %>
-
-      <% if user_signed_in? %>
-        <div class="buttons">
-          <%= link_to "New Post", new_post_path, class: 'button'%>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: 'button'%>
-        </div>
-      <% else %>
-        <div class="buttons">
-          <%= link_to "Log In", new_user_session_path, class: 'button' %>
-        </div>
-      <% end %>
-    </div>
-
     <% flash.each do |name, msg| %>
       <%= content_tag(:div, msg, class: "alert") %>
     <% end %>

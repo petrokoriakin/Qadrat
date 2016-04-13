@@ -21,18 +21,16 @@
     <%= image_tag @post.image.url(:medium) %>
   <% end %>
 
-  <div id="comments">
-    <h2><%= @post.comments.count %> Comments</h2>
-    <%= render @post.comments %>
-    <% if user_signed_in? %>
-      <h3>Add a comment:</h3>
-      <%= render "comments/form" %>
-    <% else %>
-      <p>
-        <font color="#44ACB7">
-          <strong><%= link_to "Log in", new_user_session_path %></strong>
-        </font> to type comments
-      </p>
-    <% end %>
-  </div>
+  <h2><%= @post.comments.count %> Comments</h2>
+  <%= render @post.comments %>
+  <% if user_signed_in? %>
+    <h3>Add a comment:</h3>
+    <%= render "comments/form" %>
+  <% else %>
+    <p>
+      <font color="#44ACB7">
+        <strong><%= link_to "Log in", new_user_session_path %></strong>
+      </font> to type comments
+    </p>
+  <% end %>
 </div>

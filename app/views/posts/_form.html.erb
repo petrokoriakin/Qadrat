@@ -1,3 +1,4 @@
+<div class="row">
 <%= form_for @post, html: { multipart: true } do |f| %>
 
   <% if @post.errors.any? %>
@@ -13,11 +14,12 @@
     </div>
   <% end %>
 
-  <p>
-    <%= f.label :title %> <br>
-    <%= f.text_field  :title %>
-  </p>
-
+  <div class="row">
+    <div class="input-field col s6">
+      <%= f.label :title %> <br>
+      <%= f.text_field  :title %>
+    </div>
+  </div>
   <p>
     <%= f.label :tag_list, "Tags (separated by commas)" %><br />
     <%= f.text_field :tag_list %>
@@ -37,3 +39,4 @@
     <%= f.submit %>
   </p>
 <% end %>
+</div>

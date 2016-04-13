@@ -13,10 +13,7 @@ class Ability
             can :update, User, id: user.id
             can [:update, :destroy], Comment, user_id: user.id
         elsif user && user.role?(:moderator)
-            # can :manage, [Post, Comment]
-            can :manage, :usernews
-            # can :read, :newslist
-            can [:create, :update, :destroy], Post, Comment
+            can :manage, [Post, Comment]
         end
     end
 end
