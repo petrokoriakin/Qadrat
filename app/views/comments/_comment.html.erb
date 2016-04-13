@@ -7,7 +7,7 @@
       <%= comment.body %>
     </p>
     <% if comment.is_answer %>
-      <i class="fa fa-check fa-3x"></i>
+      <i class="large material-icons">done</i>
     <% else %>
       <% if user_signed_in? && @post.user_id == current_user.id %>
         <strong><%= link_to "Mark Answer", [comment.post, comment], method: :put %></strong>

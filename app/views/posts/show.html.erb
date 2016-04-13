@@ -12,7 +12,9 @@
       | <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?"} %>
     <% end -%>
   </p>
-
+  <p>
+    Tags: <%= raw @post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(' ') %>
+  </p>
   <p class="body">
     <%= @post.body %>
   </p>
@@ -21,10 +23,15 @@
     <%= image_tag @post.image.url(:medium) %>
   <% end %>
 
-  <h2><%= @post.comments.count %> Comments</h2>
-  <%= render @post.comments %>
+  <% if @post.comments.count > 0 %>
+    <h3><%= @post.comments.count %> Comments</h3>
+    <%= render @post.comments %>
+  <% else %>
+    <h4>No Comments</h4>
+  <% end -%>
+  <hr/>
   <% if user_signed_in? %>
-    <h3>Add a comment:</h3>
+    <h4>Add a comment:</h4>
     <%= render "comments/form" %>
   <% else %>
     <p>

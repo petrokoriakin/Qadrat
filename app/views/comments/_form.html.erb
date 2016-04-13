@@ -1,6 +1,6 @@
 <%= form_for([@post, @post.comments.build]) do |f| %>
   <div class="row">
-    <div class="input-field col s6">
+    <div class="input-field col s12">
       <%= f.label :body %><br>
       <%= f.text_area :body, class: 'materialize-textarea' %>
     </div>

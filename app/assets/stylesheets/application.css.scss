@@ -20,6 +20,24 @@
 @import "materialize";
 @import "materialize/extras/nouislider";
 
+html,
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+#container {
+   min-height:100%;
+   position:relative;
+}
+
+#body {
+   padding:10px;
+   padding-bottom:90px;   /* Height of the footer */
+}
 #footer {
    position:absolute;
    bottom:0;
