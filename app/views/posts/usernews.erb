@@ -23,8 +23,10 @@
   <% end -%>
 <% end -%>
 
-<div class="fixed-action-btn horizontal" style="bottom: 90px; right: 24px;">
-    <a href="/posts/new" class="btn-floating btn-large waves-effect waves-light red">
-      <i class="large material-icons">mode_edit</i>
-    </a>
-</div>
+<% if user_signed_in? %>
+  <div class="fixed-action-btn horizontal" style="bottom: 90px; right: 24px;">
+      <a href="/posts/new" class="btn-floating btn-large waves-effect waves-light red">
+        <i class="large material-icons">mode_edit</i>
+      </a>
+  </div>
+<% end -%>

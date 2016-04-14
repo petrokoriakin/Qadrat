@@ -23,27 +23,33 @@
 </div>
 
 <% if @post.comments.count > 0 %>
-  <h3><%= @post.comments.count %> Comments</h3>
-  <hr />
-
-  <div class="col s12 m8 offset-m2 l6 offset-l3">
-    <div class="card-panel grey lighten-5 z-depth-1">
-      <%= render @post.comments %>
-    </div>
-  </div>
+  <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header">
+        <i class="material-icons">comment</i>
+        <%= @post.comments.count %> comments
+      </div>
+      <div class="collapsible-body">
+        <div class="col s12 m8 offset-m2 l6 offset-l3">
+          <div class="card-panel grey lighten-5 z-depth-1">
+            <%= render @post.comments.order(:is_answer).reverse_order %>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
 <% else %>
   <h4>No Comments</h4>
 <% end -%>
+
+<script>
+  $('.collapsible').collapsible({ accordion : false });
+</script>
+
 <hr/>
 <% if user_signed_in? %>
   <h4>Add a comment:</h4>
   <%= render "comments/form" %>
 <% else %>
-  <p>
-    <font color="#44ACB7">
-      <strong><%= link_to "Log in", new_user_session_path %></strong>
-    </font> to type comments
-  </p>
+  <%= link_to "Log in", new_user_session_path,  class: 'waves-effect waves-light btn'%>
 <% end %>
-
-
