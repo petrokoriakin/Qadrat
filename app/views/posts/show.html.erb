@@ -1,49 +1,49 @@
-<div id="post_content">
-  <h1 class="title">
-    <%= @post.title %>
-  </h1>
-  <p class="date">
-    Submitted <%= time_ago_in_words(@post.created_at) %> ago by
-    <strong><%= link_to "#{(User.find_by_id(@post.user_id)).username}", user_path(@post.user_id) %></strong>
+<div class="card">
+  <% if @post.image.file? %>
+    <div class="card-image">
+      <%= image_tag @post.image.url(:medium) %>
+    </div>
+  <% end %>
+
+  <div class="card-content">
+    <span class="card-title grey-text text-darken-4"><%= @post.title %></span>
+    <p><%= @post.body %></p>
+  </div>
+  <div class="card-action">
+    <p>
+      Tags: <%= raw @post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(' ') %>
+    </p>
     <% if can? :update, @post %>
-      | <%= link_to "Edit", edit_post_path(@post) %>
+      <%= link_to "Edit", edit_post_path(@post), class: 'waves-effect waves-light btn' %>
     <% end %>
     <% if can? :destroy, @post %>
-      | <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?"} %>
+      <%= link_to "Delete", post_path(@post), class: 'waves-effect waves-light btn', method: :delete, data: { confirm: "Are you sure?"} %>
     <% end -%>
-  </p>
-  <p>
-    Tags: <%= raw @post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(' ') %>
-  </p>
-  <p class="body">
-    <%= @post.body %>
-  </p>
-
-  <% if @post.image.file? %>
-    <%= image_tag @post.image.url(:medium) %>
-  <% end %>
-
-  <% if @post.comments.count > 0 %>
-    <h3><%= @post.comments.count %> Comments</h3>
-    <hr />
-    <div class="col s12 m8 offset-m2 l6 offset-l3">
-      <div class="card-panel grey lighten-5 z-depth-1">
-        <%= render @post.comments %>
-      </div>
-    </div>
-  <% else %>
-    <h4>No Comments</h4>
-  <% end -%>
-  <hr/>
-  <% if user_signed_in? %>
-    <h4>Add a comment:</h4>
-    <%= render "comments/form" %>
-  <% else %>
-    <p>
-      <font color="#44ACB7">
-        <strong><%= link_to "Log in", new_user_session_path %></strong>
-      </font> to type comments
-    </p>
-  <% end %>
+  </div>
 </div>
+
+<% if @post.comments.count > 0 %>
+  <h3><%= @post.comments.count %> Comments</h3>
+  <hr />
+
+  <div class="col s12 m8 offset-m2 l6 offset-l3">
+    <div class="card-panel grey lighten-5 z-depth-1">
+      <%= render @post.comments %>
+    </div>
+  </div>
+<% else %>
+  <h4>No Comments</h4>
+<% end -%>
+<hr/>
+<% if user_signed_in? %>
+  <h4>Add a comment:</h4>
+  <%= render "comments/form" %>
+<% else %>
+  <p>
+    <font color="#44ACB7">
+      <strong><%= link_to "Log in", new_user_session_path %></strong>
+    </font> to type comments
+  </p>
+<% end %>
+
 

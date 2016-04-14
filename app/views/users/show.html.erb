@@ -1,66 +1,52 @@
-<div id="page_wrapper">
-  <% if @user.username.empty? %>
-    <h2><strong>User</strong></h2>
-  <% else %>
-    <h2><strong><%= @user.username %></strong></h2>
-  <% end %>
-  <hr />
-  <p><strong>Email:</strong> <%= @user.email %></p>
-
-  <p>
-    <%= @user.username.capitalize %> has typed
-    <font color="#44ACB7">
-      <strong>
-        <%= link_to "#{@p_counter} posts.", userposts_path(@user.id) %>
-      </strong>
-    </font>
-  </p>
-
-  <p>
-    <% if @user.subscribed_tags.empty? %>
-      <strong>No Subscriptions found</strong>
-    <% else %>
-      <strong>Subscribed on:
-        <font color="#44ACB7">
-          <%= raw @user.subscribed_tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(' ') %>
-        </font>
-      </strong>
-    <% end -%>
-  </p>
-
-  <p>
-    <strong>Information:</strong>
-    <% if @user.information != nil %>
-      <%= @user.information %>
-      <% if can? :update, @user %>
+<% if @user.username.empty? %>
+  <h2><strong>User</strong></h2>
+<% else %>
+  <h2><strong><%= @user.username %></strong></h2>
+<% end %>
+<hr />
+<div class="card">
+  <div class="col s12 m8 offset-m2 l6 offset-l3">
+    <div class="card-panel grey lighten-5 z-depth-1">
+      <div class="row valign-wrapper">
+        <div class="col s2">
+          <%= image_tag @user.avatar.url(:small), class: "circle responsive-img"  %>
+        </div>
+        <div class="col s10">
+          <span class="black-text">
+            <p>
+              Information:
+              <% if @user.information.nil? || @user.information.empty? %>
+                no information found.
+              <% else %>
+                <%= @user.information %>
+              <% end %>
+            </p>
+            <p>Contact: <%= @user.email %></p>
+            <p>
+              <% if @p_counter > 0 %>
+                <%= @user.username.capitalize %> has typed
+                <%= link_to "#{@p_counter} questions.", userposts_path(@user.id) %>
+              <% else %>
+                <%= @user.username.capitalize %> has no questions
+              <% end -%>
+            </p>
+          </span>
+        </div>
+      </div>
+      <div class="card-action">
         <p>
-          <font color="#44ACB7">
-              <strong><%= link_to "Edit profile.", edit_user_path %></strong>
-          </font>
+          <% if @user.subscribed_tags.empty? %>
+            No subscriptions found
+          <% else %>
+            Subscribed on:
+            <%= raw @user.subscribed_tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(' ') %>
+          <% end -%>
         </p>
-      <% end %>
-    <% else %>
-      no information found.
-      <% if can? :update, @user %>
-        <p>
-          <font color="#44ACB7">
-                <strong><%= link_to "Edit profile.", edit_user_path %></strong>
-          </font>
-        </p>
-      <% end %>
-    <% end %>
-  </p>
-
-  <p>
-    <strong>Avatar:</strong> <br>
-    <%= image_tag @user.avatar.url(:small) %>
-  </p>
-
-  <% if can? :update, @user %>
-    <p>
-      <font color="#44ACB7">
-              <strong><%= link_to "Change password", edit_user_registration_path %></strong>
-      </font>
-    </p>
-  <% end %>
+        <% if can? :update, @user  %>
+          <%= link_to "Edit profile", edit_user_path, class: 'waves-effect waves-light btn' %>
+          <%= link_to "Change password", edit_user_registration_path, class: 'waves-effect waves-light btn' %>
+        <% end -%>
+      </div>
+    </div>
+  </div>
 </div>
