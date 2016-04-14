@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   has_attached_file :image, styles: { large: "600x600>", medium: "350x350>", thumb: "150x150#" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
-  validates :title, presence: true, length: { minimum: 5 }
+  validates :title, presence: true, length: { minimum: 5, maximum: 60 }
   validates :body, presence: true
   validates :tags, presence: true
 
@@ -31,4 +31,22 @@ class Post < ActiveRecord::Base
       # Tag.find_or_create_by_name(n.strip)
     end
   end
+
+  def titleValid
+    return title if title.size < 28
+    tester = ''
+    result = ''
+    arr = title.split(' ')
+
+    arr.each do |item|
+      tester += item + ' '
+      if tester.size + 3 < 28
+        result = tester
+      else
+        result += '...'
+        return result
+      end
+    end
+  end
+
 end
