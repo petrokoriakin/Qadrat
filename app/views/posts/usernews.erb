@@ -6,7 +6,7 @@
           <div class="col s12 m7">
             <div class="card">
               <div class="card-content">
-                <p><%= link_to post.title, post %></p>
+                <p><%= link_to post.titleValid, post %></p>
                 <p><%= post.created_at.strftime(" %B, %d, %Y") %></p>
               </div>
               <div class="card-action">
@@ -24,7 +24,7 @@
 <% end -%>
 
 <div class="fixed-action-btn horizontal" style="bottom: 90px; right: 24px;">
-    <a href="/posts/new" class="btn-floating btn-large red">
+    <a href="/posts/new" class="btn-floating btn-large waves-effect waves-light red">
       <i class="large material-icons">mode_edit</i>
     </a>
 </div>
