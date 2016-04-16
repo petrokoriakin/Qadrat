@@ -6,7 +6,7 @@
           <div class="col s12 m7">
             <div class="card">
               <div class="card-content">
-                <p><%= link_to post.titleValid, post %></p>
+                <p><%= link_to excerpt(post.title, post.title[0], radius: 28), post %></p>
                 <p><%= post.created_at.strftime(" %B, %d, %Y") %></p>
               </div>
               <div class="card-action">

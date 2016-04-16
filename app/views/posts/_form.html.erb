@@ -1,55 +1,63 @@
 <div class="row">
-<%= form_for @post, html: { multipart: true } do |f| %>
+  <%= form_for @post, html: { multipart: true } do |f| %>
 
-  <% if @post.errors.any? %>
-    <div id="errors">
-      <h2>
-        <%= pluralize(@post.errors.count, "error") %> prevented this post from saving
-      </h2>
+    <% if @post.errors.any? %>
+      <ul class="collapsible red lighten-4" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header red lighten-4">
+            <i class="material-icons">error_outline</i>
+            <%= pluralize(@post.errors.count, "error") %>
+          </div>
+
+          <div class="collapsible-body">
+              <% @post.errors.full_messages.each do |msg| %>
+                <p><%= msg %></p>
+              <% end %>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :title %> <br>
+        <%= f.text_field  :title %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+      <%= f.label :tag_list, "Tags (separated by commas)" %><br />
+      <%= f.text_field :tag_list %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <%= f.label :body %><br>
+        <%= f.text_area :body, class: 'materialize-textarea' %>
+      </div>
+    </div>
+
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      <%= f.submit "Create" %>
+    </button>
+
+    <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 90px; right: 24px;">
+      <a class="btn-floating btn-large red">
+        <i class="large material-icons">add</i>
+      </a>
       <ul>
-        <% @post.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
+        <li>
+        <a class="btn-floating blue">
+        <i class="material-icons">add_a_photo</i></a>
+        </li>
       </ul>
     </div>
+
   <% end %>
-
-  <div class="row">
-    <div class="input-field col s12">
-      <%= f.label :title %> <br>
-      <%= f.text_field  :title %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="input-field col s12">
-    <%= f.label :tag_list, "Tags (separated by commas)" %><br />
-    <%= f.text_field :tag_list %>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="input-field col s12">
-      <%= f.label :body %><br>
-      <%= f.text_area :body, class: 'materialize-textarea' %>
-    </div>
-  </div>
-
-  <button class="btn waves-effect waves-light" type="submit" name="action">
-    <%= f.submit "Create" %>
-  </button>
-
-  <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 90px; right: 24px;">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">add</i>
-    </a>
-    <ul>
-      <li>
-      <a class="btn-floating blue">
-      <i class="material-icons">add_a_photo</i></a>
-      </li>
-    </ul>
-  </div>
-
-<% end %>
 </div>
+
+<script>
+  $('.collapsible').collapsible({ accordion : false });
+</script>

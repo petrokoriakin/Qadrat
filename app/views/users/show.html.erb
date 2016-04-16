@@ -23,9 +23,9 @@
             </p>
             <p>Contact: <%= @user.email %></p>
             <p>
-              <% if @p_counter > 0 %>
+              <% if @posts_counter > 0 %>
                 <%= @user.username.capitalize %> has typed
-                <%= link_to "#{@p_counter} questions.", userposts_path(@user.id) %>
+                <%= link_to "#{@posts_counter} questions.", userposts_path(@user.id) %>
               <% else %>
                 <%= @user.username.capitalize %> has no questions
               <% end -%>

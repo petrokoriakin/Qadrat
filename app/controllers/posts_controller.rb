@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   load_and_authorize_resource except: [:userposts, :withtag, :usernews]
 
   def index
-    @posts = Post.all.order('created_at DESC')
+    @posts = Post.order('created_at DESC')
   end
 
   def show
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
 
   def usernews
     @posts = []
-    allPosts = Post.all.order('created_at DESC')
+    allPosts = Post.order('created_at DESC')
     userTags = current_user.subscribed_tags.map(&:name)
     allPosts.each do |post|
       postTags = post.tag_list.split(',')

@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   def show
     if (User.find_by_id(params[:id]))
       @user = User.find(params[:id])
-      @p_counter = Post.where(user_id: @user.id).count
+      @posts_counter = Post.where(user_id: @user.id).count
     else
       redirect_to root_path, notice: "User not found!"
     end

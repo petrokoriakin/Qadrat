@@ -13,16 +13,16 @@ class User < ActiveRecord::Base
   has_many :subscriptions, dependent: :destroy
   has_many :subscribed_tags, source: :tag, through: :subscriptions
 
-  def follow (id_of_tag)
-    subscriptions.create(tag_id: id_of_tag)
+  def follow(tag_id)
+    subscriptions.create(tag_id: tag_id)
   end
 
-  def unfollow (id_of_tag)
-    subscriptions.find_by(tag_id: id_of_tag).destroy
+  def unfollow(tag_id)
+    subscriptions.find_by(tag_id: tag_id).destroy
   end
 
-  def is_following(id_of_user, id_of_tag)
-    is_sub = Subscription.find_by(user_id: id_of_user, tag_id: id_of_tag)
+  def is_following(user_id, tag_id)
+    is_sub = Subscription.find_by(user_id: user_id, tag_id: tag_id)
     if is_sub
       return true
     else
@@ -32,10 +32,7 @@ class User < ActiveRecord::Base
 
   def following_tag_list
     subscribed_tags.map(&:name)
-   # subscribed_tags.map(&:id)
   end
-
-  ROLES = %w[admin moderator user]
 
   def role?(requested_role)
     self.role == requested_role.to_s

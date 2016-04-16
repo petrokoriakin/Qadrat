@@ -28,25 +28,23 @@ class Post < ActiveRecord::Base
   def tag_list=(names)
     self.tags = names.split(",").map do |n|
       Tag.where(name: n.strip).first_or_create!
-      # Tag.find_or_create_by_name(n.strip)
     end
   end
 
-  def titleValid
-    return title if title.size < 28
-    tester = ''
-    result = ''
-    arr = title.split(' ')
+  # def titleValid
+  #   return title if title.size < 28
+  #   tester = ''
+  #   result = ''
+  #   arr = title.split(' ')
 
-    arr.each do |item|
-      tester += item + ' '
-      if tester.size + 3 < 28
-        result = tester
-      else
-        result += '...'
-        return result
-      end
-    end
-  end
-
+  #   arr.each do |item|
+  #     tester += item + ' '
+  #     if tester.size + 3 < 28
+  #       result = tester
+  #     else
+  #       result += '...'
+  #       return result
+  #     end
+  #   end
+  # end
 end
