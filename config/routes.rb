@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   root "posts#index"
 
-  get '/about' => 'pages#about'
+  get '/about' => 'pages#about', as: :about
   get 'userposts/:id', to: 'posts#userposts', as: :userposts
   get 'tags/:tag', to: 'posts#withtag', as: :tag
   resources :users, only: [:show, :update, :edit]
@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   post '/follow_tag/:tag', to: 'subscriptions#follow_tag', as: :follow_tag
   post 'unfollow_tag/:tag', to: 'subscriptions#unfollow_tag', as: :unfollow_tag
 
-  get '/myfeed', to: 'posts#usernews', as: :myfeed
+  get '/myfeed', to: 'posts#userfeed', as: :myfeed
 end

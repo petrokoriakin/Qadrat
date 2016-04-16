@@ -1,15 +1,15 @@
-<% if comment.is_answer  %>
+<% if comment.is_answer %>
   <div class="row valign-wrapper light-green accent-1">
 <% else %>
   <div class="row valign-wrapper ">
-<% end -%>
+<% end %>
   <div class="col s2">
     <%= image_tag User.find_by_id(comment.user_id).avatar.url(:small), class: "circle responsive-img" %>
   </div>
   <div class="col s10">
     <span class="black-text">
       <p>
-        <%= link_to "#{(User.find_by_id(comment.user_id)).username}", user_path(comment.user_id) %>
+        <%= link_to (User.find_by_id(comment.user_id)).username, user_path(comment.user_id) %>
       </p>
       <%= comment.body %>
       <% if can? :destroy, comment %>

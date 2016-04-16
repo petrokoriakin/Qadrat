@@ -3,11 +3,11 @@
     <nav>
       <div class="nav-wrapper deep-purple lighten-2">
         <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <% if !user_signed_in? %>
-            <a href="<%= root_path%>">
+          <% unless user_signed_in? %>
+            <%= link_to root_path do %>
               <i class="large material-icons">home</i>
-            </a>
-          <% end -%>
+            <% end %>
+          <% end %>
         </ul>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <% if user_signed_in? %>

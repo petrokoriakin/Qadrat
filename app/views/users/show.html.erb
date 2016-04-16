@@ -1,8 +1,5 @@
-<% if @user.username.empty? %>
-  <h3><strong>User</strong></h3>
-<% else %>
-  <h3><strong><%= @user.username %></strong></h3>
-<% end %>
+<h3><strong><%= show_name(@user) %></strong></h3>
+
 <hr />
 <div class="card">
   <div class="col s12 m8 offset-m2 l6 offset-l3">

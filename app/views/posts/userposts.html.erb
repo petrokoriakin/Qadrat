@@ -1,31 +1,5 @@
 <h4>
   <%= @posts[0].user.username %> questions:
 </h4>
-<% @posts.each do |post| %>
-  <div class="col-md-4 text-center">
-        <div class="col s12 m7">
-          <div class="card">
-            <div class="card-content">
-              <p><%= link_to excerpt(post.title, post.title[0], radius: 28), post %></p>
-              <p><%= post.created_at.strftime(" %B, %d, %Y") %></p>
-            </div>
-            <div class="card-action">
-               <p>
-                Tags: <%= link_to post.tags.first.name, tag_path(post.tags.first.name) %>
-                <% if (post.tags.map.size - 1) > 0 %>
-                  + <%= post.tags.map.size - 1 %> more
-                <% end -%>
-              </p>
-            </div>
-          </div>
-        </div>
-  </div>
-<% end %>
 
-<% if user_signed_in? %>
-  <div class="fixed-action-btn horizontal" style="bottom: 90px; right: 24px;">
-      <a href="/posts/new" class="btn-floating btn-large red">
-        <i class="large material-icons">mode_edit</i>
-      </a>
-  </div>
-<% end -%>
+<%= render 'mainpage' %>

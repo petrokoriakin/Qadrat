@@ -1,0 +1,26 @@
+<% @posts.each do |post| %>
+  <div class="col-md-4 text-center">
+        <div class="col s12 m7">
+          <div class="card">
+            <div class="card-content">
+              <p><%= link_to excerpt(post.title, post.title[0], radius: 28), post %></p>
+              <p><%= post.created_at.strftime(" %B, %d, %Y") %></p>
+            </div>
+            <div class="card-action">
+               <p>
+                Tags: <%= link_to post.tags.first.name, tag_path(post.tags.first.name) %>
+                <%= tags_size_valdiator(post.tags.map.size) %>
+              </p>
+            </div>
+          </div>
+        </div>
+  </div>
+<% end %>
+
+<% if user_signed_in? %>
+  <div class="fixed-action-btn horizontal add_button">
+    <%= link_to new_post_path, class: 'btn-floating btn-large red' do %>
+      <i class="large material-icons">mode_edit</i>
+    <% end %>
+  </div>
+<% end %>

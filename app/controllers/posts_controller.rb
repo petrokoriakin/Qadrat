@@ -54,7 +54,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def usernews
+  def userfeed
     @posts = []
     allPosts = Post.order('created_at DESC')
     userTags = current_user.subscribed_tags.map(&:name)

@@ -30,21 +30,4 @@ class Post < ActiveRecord::Base
       Tag.where(name: n.strip).first_or_create!
     end
   end
-
-  # def titleValid
-  #   return title if title.size < 28
-  #   tester = ''
-  #   result = ''
-  #   arr = title.split(' ')
-
-  #   arr.each do |item|
-  #     tester += item + ' '
-  #     if tester.size + 3 < 28
-  #       result = tester
-  #     else
-  #       result += '...'
-  #       return result
-  #     end
-  #   end
-  # end
 end

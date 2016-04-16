@@ -11,23 +11,24 @@
   </div>
   <div class="card-action">
     <p>
-      Tags: <%= raw @post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(' ') %>
+      Tags: <%= raw tags_list(@post) %>
     </p>
     <% if can? :update, @post %>
-      <%= link_to "Edit", edit_post_path(@post), class: 'waves-effect waves-light btn' %>
+      <%= link_to "Edit", edit_post_path(@post),
+      class: 'waves-effect waves-light btn' %>
     <% end %>
     <% if can? :destroy, @post %>
       <%= link_to "Delete", post_path(@post), class: 'waves-effect waves-light btn', method: :delete, data: { confirm: "Are you sure?"} %>
-    <% end -%>
+    <% end %>
   </div>
 </div>
 
-<% if @post.comments.count > 0 %>
+<% if @post.comments.any? %>
   <ul class="collapsible" data-collapsible="accordion">
     <li>
       <div class="collapsible-header">
         <i class="material-icons">comment</i>
-        <%= @post.comments.count %> comments
+        <%= @post.comments.size %> comments
       </div>
       <div class="collapsible-body">
         <div class="col s12 m8 offset-m2 l6 offset-l3">
@@ -40,16 +41,17 @@
   </ul>
 <% else %>
   <h4>No Comments</h4>
-<% end -%>
-
-<script>
-  $('.collapsible').collapsible({ accordion : false });
-</script>
+<% end %>
 
 <hr/>
 <% if user_signed_in? %>
   <h4>Add a comment:</h4>
   <%= render "comments/form" %>
 <% else %>
-  <%= link_to "Log in", new_user_session_path,  class: 'waves-effect waves-light btn'%>
+  <%= link_to "Log in", new_user_session_path,
+  class: 'waves-effect waves-light btn'%>
 <% end %>
+
+<script>
+  $('.collapsible').collapsible({ accordion : false });
+</script>
