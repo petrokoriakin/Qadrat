@@ -1,15 +1,68 @@
-<div class="card medium">
-  <div class="card-image waves-effect waves-block waves-light">
-    <%= image_tag "download1.jpeg", height: '400', class: 'activator'%>
-  </div>
-  <div class="card-content">
-    <span class="card-title activator grey-text text-darken-4">Few words about me<i class="material-icons right">keyboard_arrow_up</i></span>
-  </div>
-  <div class="card-reveal">
-    <span class="card-title grey-text text-darken-4">Hey, I'm Misha<i class="material-icons right">keyboard_arrow_down</i></span>
-    <p>Welcome to blog about my life. Most of all I like Programming and Math.</p>
-    <p>You can see some of my projects on <a href="https://github.com/malworm">Github</a>.</p>
-    <p>If you like what I do, contact me via <a href="mailto:snowbars125@gmail.com">Email</a> or <a href="https://www.facebook.com/mal.worm">Facebook</a>.</p>
-    <p>Thanks for visit!</p>
-  </div>
-</div>
+<h4>About</h4>
+<hr>
+<ul class="collapsible" data-collapsible="accordion">
+  <li>
+    <div class="collapsible-header">
+      <i class="fa fa-exclamation" aria-hidden="true"></i>Rules
+    </div>
+    <div class="collapsible-body">
+      <p>
+        Here is no special rules, you just have to be tolerant to other users. <br>
+        Don't ask questions answers to which are plased in top google search results.
+      </p>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <i class="fa fa-info" aria-hidden="true"></i>About Site
+    </div>
+    <div class="collapsible-body">
+      <p>
+        This is open source Education-Project. <br>
+        I wanted to create some place where people could find answers on
+        their questions and to share knowledge. <br>
+        <a href="https://github.com/malworm/Blog">
+          <i class="fa fa-github fa-lg" aria-hidden="true"></i> source code
+        </a>
+      </p>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <i class="fa fa-smile-o" aria-hidden="true"></i>About Me
+    </div>
+    <div class="collapsible-body">
+      <p>
+        I'm young programmer. You can call me malworm. <br>
+        I like Ruby and Rails
+        <i class="fa fa-diamond" aria-hidden="true"></i>
+        and also this penguin
+        <i class="fa fa-linux" aria-hidden="true"></i> <br>
+        My dream is to develop some project, that could be useful for
+        many people and write my name into the history.
+      </p>
+    </div>
+  </li>
+  <li>
+    <div class="collapsible-header">
+      <i class="fa fa-envelope-o" aria-hidden="true"></i>Contact
+    </div>
+    <div class="collapsible-body">
+      <p>
+        If you like what I do and want to work or to
+        communicate with me, contact me via
+        <a href="mailto:malworm@tutanota.com">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i> Email
+        </a> <br>
+        You can also check out some of my projects on
+        <a href="https://github.com/malworm">
+          <i class="fa fa-github fa-lg" aria-hidden="true"></i> github
+        </a>
+      </p>
+    </div>
+  </li>
+</ul>
+
+<script>
+  $('.collapsible').collapsible({ accordion : false });
+</script>

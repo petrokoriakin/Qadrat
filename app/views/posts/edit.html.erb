@@ -1,6 +1,5 @@
-<div id="page_wrapper">
-  <h1>Edit Post</h1>
-  <% if can? :update, @post %>
-    <%= render 'form' %>
-  <% end %>
-</div>
+<h4>Edit Post</h4>
+<% if can? :update, @post %>
+  <%= render 'editform' %>
+<% end %>
+

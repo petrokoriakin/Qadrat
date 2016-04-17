@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   root "posts#index"
 
   get '/about' => 'pages#about', as: :about
+  get '/alltags' => 'pages#alltags', as: :alltags
   get 'userposts/:id', to: 'posts#userposts', as: :userposts
   get 'tags/:tag', to: 'posts#withtag', as: :tag
   resources :users, only: [:show, :update, :edit]

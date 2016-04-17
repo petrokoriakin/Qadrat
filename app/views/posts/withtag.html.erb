@@ -1,6 +1,8 @@
 <h4>
-  <strong>Tag: <%= @tagname %></strong>
+  <i class="fa fa-tag" aria-hidden="true"></i>
+  <%= @tagname %>
 </h4>
+<hr>
 
 <% if user_signed_in? %>
   <% if current_user.is_following(current_user.id, @tag.id) %>

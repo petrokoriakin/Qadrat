@@ -3,12 +3,15 @@
         <div class="col s12 m7">
           <div class="card">
             <div class="card-content">
-              <p><%= link_to excerpt(post.title, post.title[0], radius: 28), post %></p>
+              <span class="card-title">
+                <%= link_to excerpt(post.title, post.title[0], radius: 16), post %>
+              </span>
               <p><%= post.created_at.strftime(" %B, %d, %Y") %></p>
             </div>
             <div class="card-action">
                <p>
-                Tags: <%= link_to post.tags.first.name, tag_path(post.tags.first.name) %>
+                <i class="fa fa-tags" aria-hidden="true"></i>
+                <%= link_to post.tags.first.name, tag_path(post.tags.first.name) %>
                 <%= tags_size_valdiator(post.tags.map.size) %>
               </p>
             </div>

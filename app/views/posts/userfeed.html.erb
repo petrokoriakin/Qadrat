@@ -1,5 +1,7 @@
+<h4>News Feed</h4>
+<hr>
 <% if @posts.empty? %>
-  <h3>Subscribe on some Tags to have own feed</h3>
+  <h4>Subscribe on some Tags to have own feed</h4>
   <% if user_signed_in? %>
     <div class="fixed-action-btn horizontal add_button">
       <%= link_to new_post_path, class: 'btn-floating btn-large red' do %>

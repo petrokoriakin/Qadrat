@@ -1,40 +1,66 @@
-<div id="header">
-  <div class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper deep-purple lighten-2">
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <% unless user_signed_in? %>
-            <%= link_to root_path do %>
-              <i class="large material-icons">home</i>
-            <% end %>
-          <% end %>
-        </ul>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <% if user_signed_in? %>
-            <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "grey-text text-lighten-4" %></li>
-          <% else %>
-            <li><%= link_to "Log In", new_user_session_path, class: "grey-text text-lighten-4" %></li>
-          <% end -%>
-        </ul>
-        <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <%if user_signed_in? %>
-            <li>
-              <a class="dropdown-button" href="#" data-activates="mydropdown"><i class="large material-icons">account_circle</i></a>
-              <script>
-                $(".dropdown-button").dropdown();
-              </script>
-            </li>
-          <% end -%>
-        </ul>
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper deep-purple lighten-2">
+
+      <ul id="slide-out" class="side-nav grey lighten-5">
+        <br>
         <% if user_signed_in? %>
-          <ul class="dropdown-content" id="mydropdown">
-            <li><%= link_to "Profile", user_path(current_user.id) %></li>
-            <li><%= link_to "My feed", myfeed_path %></li>
-            <li class="divider"></li>
-            <li><%= link_to "The Wall", root_path %></li>
+          <div style="text-align:center;" class="black-text">
+            <%= image_tag current_user.avatar.url(:small), class: "circle responsive-img" %> <br />
+            <%= current_user.username %>
+          </div>
+          <li><%= link_to "My Profile", user_path(current_user.id) %></li>
+          <li><%= link_to "News Feed", myfeed_path %></li>
+        <% else %>
+          <div style="text-align:center;" class="black-text">
+            <i class="fa fa-user fa-5x" aria-hidden="true"></i><br>
+            Guest
+          </div>
+        <% end %>
+        <li><%= link_to "All Questions", root_path %></li>
+        <li><%= link_to "All Tags", alltags_path %></li>
+  <!--  <li class="no-padding">
+          <ul class="collapsible collapsible-accordion">
+            <li>
+              <a class="collapsible-header">Dropdown<i class="mdi-navigation-arrow-drop-down"></i></a>
+              <div class="collapsible-body">
+                <ul>
+                  <li><a href="#!">First</a></li>
+                  <li><a href="#!">Second</a></li>
+                  <li><a href="#!">Third</a></li>
+                  <li><a href="#!">Fourth</a></li>
+                </ul>
+              </div>
+            </li>
           </ul>
-        <% end -%>
-      </div>
-    </nav>
-  </div>
+        </li> -->
+      </ul>
+      <a href="#" data-activates="slide-out" class="button-collapse show-on-large">
+        <i class="mdi-navigation-menu"></i>
+      </a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+          </li>
+        <% else %>
+          <li><%= link_to "Log In", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
 </div>
+
+<script>
+  $(document).ready(function(){
+    // Initialize collapse button
+    $(".button-collapse").sideNav({
+      menuWidth: 250, // Default is 240
+      edge: 'left', // Choose the horizontal origin
+      closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    });
+    // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+    //$('.collapsible').collapsible();
+  });
+</script>
+
