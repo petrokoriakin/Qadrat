@@ -3,24 +3,24 @@
 <% else %>
   <div class="row valign-wrapper ">
 <% end %>
-  <div class="col s2">
-    <%= image_tag User.find_by_id(comment.user_id).avatar.url(:small), class: "circle responsive-img" %>
+  <div class="col s1">
+    <% if User.find_by_id(comment.user_id).avatar_file_size.nil? %>
+      <i class="fa fa-linux fa-5x" aria-hidden="true"></i>
+    <% else %>
+      <%= image_tag User.find_by_id(comment.user_id).avatar.url(:small), class: "circle responsive-img" %>
+    <% end %>
   </div>
   <div class="col s10">
     <span class="black-text">
-      <p>
-        <%= link_to (User.find_by_id(comment.user_id)).username, user_path(comment.user_id) %>
-      </p>
-      <%= comment.body %>
+      <%= link_to (User.find_by_id(comment.user_id)).username, user_path(comment.user_id) %>
+      <br><%= comment.body %> <br><br>
       <% if can? :destroy, comment %>
-          <p>
-            <% if !comment.is_answer && comment.user_id != current_user.id %>
-              <%= link_to "Answer", [comment.post, comment],
-              method: :put, class: 'waves-effect waves-light btn'%>
-            <% end -%>
-            <%= link_to 'Delete', [comment.post, comment], method: :delete,
-                  class: 'waves-effect waves-light btn', data: {confirm: "Are you sure?"}%>
-          </p>
+        <% if !comment.is_answer && comment.user_id != current_user.id %>
+          <%= link_to "Answer", [comment.post, comment],
+          method: :put, class: 'waves-effect waves-light btn'%>
+        <% end %>
+        <%= link_to 'Delete', [comment.post, comment], method: :delete,
+              class: 'waves-effect waves-light btn', data: {confirm: "Are you sure?"}%>
       <% end %>
     </span>
   </div>
