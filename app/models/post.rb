@@ -1,4 +1,7 @@
 class Post < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :search, against: [:title], associated_against: { tags: [:name], user: [:username] }
+
   has_attached_file :image, styles: { large: "600x600>", medium: "350x350>", thumb: "150x150#" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
 
@@ -28,6 +31,14 @@ class Post < ActiveRecord::Base
   def tag_list=(names)
     self.tags = names.split(",").map do |n|
       Tag.where(name: n.strip).first_or_create!
+    end
+  end
+
+  def self.text_search(query)
+    if query.present?
+      search(query)
+    else
+      scoped
     end
   end
 end

@@ -3,7 +3,12 @@ class PostsController < ApplicationController
   load_and_authorize_resource except: [:userposts, :withtag, :usernews]
 
   def index
-    @posts = Post.order('created_at DESC')
+    # @posts = Post.order('created_at DESC').page(params[:page]).per(3)
+    if params[:query]
+      @posts = Post.text_search(params[:query]).order('created_at DESC').page(params[:page]).per(12)
+    else
+      @posts = Post.order('created_at DESC').page(params[:page]).per(12)
+    end
   end
 
   def show

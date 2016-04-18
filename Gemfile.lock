@@ -120,6 +120,10 @@ GEM
       mime-types
       mimemagic (= 0.3.0)
     pg (0.18.4)
+    pg_search (1.0.5)
+      activerecord (>= 3.1)
+      activesupport (>= 3.1)
+      arel
     rack (1.6.4)
     rack-pjax (0.8.0)
       nokogiri (~> 1.5)
@@ -218,9 +222,11 @@ DEPENDENCIES
   dragonfly
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari (~> 0.16.3)
   materialize-sass
   paperclip (~> 4.3, >= 4.3.6)
   pg
+  pg_search
   rails (~> 4.2, >= 4.2.6)
   rails_admin (~> 0.8.1)
   sass-rails (~> 5.0)

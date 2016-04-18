@@ -27,3 +27,6 @@ gem 'paperclip', '~> 4.3', '>= 4.3.6'
 gem 'rails_admin', '~> 0.8.1'
 gem 'cancancan', '~> 1.10'
 gem 'materialize-sass'
+gem 'pg_search'
+gem 'kaminari', '~> 0.16.3'
+

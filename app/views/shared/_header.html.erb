@@ -1,7 +1,14 @@
 <div class="navbar-fixed">
   <nav>
     <div class="nav-wrapper deep-purple lighten-2">
-
+<!--       <div class="row brand-logo center hide-on-med-and-down">
+        <form>
+          <div class="input-field col s12">
+            <input id="search" type="search" required placeholder="Search...">
+            <label for="search"><i class="material-icons">search</i></label>
+          </div>
+        </form>
+      </div> -->
       <ul id="slide-out" class="side-nav grey lighten-5">
         <br>
         <% if user_signed_in? %>
@@ -48,10 +55,14 @@
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <% if user_signed_in? %>
           <li>
-            <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+            <%= link_to '<i class="left material-icons">power_settings_new</i>Log out'.html_safe,
+            destroy_user_session_path, method: :delete %>
           </li>
         <% else %>
-          <li><%= link_to "Log In", new_user_session_path %></li>
+          <li>
+            <%= link_to '<i class="left material-icons">power_settings_new</i>Log in'.html_safe,
+            new_user_session_path %>
+          </li>
         <% end %>
       </ul>
     </div>
