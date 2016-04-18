@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   root "posts#index"
+  get 'results', to: 'results#index', as: 'results'
 
   get '/about' => 'pages#about', as: :about
   get '/alltags' => 'pages#alltags', as: :alltags

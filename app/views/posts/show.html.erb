@@ -1,3 +1,7 @@
+<h4>
+  <%= link_to @postCreator.username, user_path(@postCreator.id) %>
+</h4>
+<hr>
 <div class="card">
   <% if @post.image.file? %>
     <div class="card-image">
@@ -25,6 +29,7 @@
 </div>
 
 <% if @post.comments.any? %>
+  <br>
   <ul class="collapsible" data-collapsible="accordion">
     <li>
       <div class="collapsible-header">
@@ -41,11 +46,13 @@
     </li>
   </ul>
 <% else %>
+  <br>
   <h4>No Comments</h4>
 <% end %>
 
 <hr/>
 <% if user_signed_in? %>
+  <br>
   <h4>Add a comment:</h4>
   <%= render "comments/form" %>
 <% else %>

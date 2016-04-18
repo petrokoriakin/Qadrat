@@ -1,10 +1,4 @@
 <h4>All Questions</h4>
-<%= form_tag posts_path, method: :get do %>
-  <p>
-    <%= text_field_tag :query, params[:query] %>
-    <%= submit_tag "Search", name: nil, class: 'waves-effect waves-light btn' %>
-  </p>
-<% end %>
 <hr>
 <%= render 'mainpage' %>
 

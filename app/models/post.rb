@@ -1,6 +1,4 @@
 class Post < ActiveRecord::Base
-  include PgSearch
-  pg_search_scope :search, against: [:title], associated_against: { tags: [:name], user: [:username] }
 
   has_attached_file :image, styles: { large: "600x600>", medium: "350x350>", thumb: "150x150#" }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
@@ -34,11 +32,7 @@ class Post < ActiveRecord::Base
     end
   end
 
-  def self.text_search(query)
-    if query.present?
-      search(query)
-    else
-      scoped
-    end
-  end
+  include PgSearch
+  pg_search_scope :search_everywhere, against: [:title],
+  associated_against: { tags: [:name], user: [:username] }
 end

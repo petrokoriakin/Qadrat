@@ -3,16 +3,12 @@ class PostsController < ApplicationController
   load_and_authorize_resource except: [:userposts, :withtag, :usernews]
 
   def index
-    # @posts = Post.order('created_at DESC').page(params[:page]).per(3)
-    if params[:query]
-      @posts = Post.text_search(params[:query]).order('created_at DESC').page(params[:page]).per(12)
-    else
-      @posts = Post.order('created_at DESC').page(params[:page]).per(12)
-    end
+    @posts = Post.order('created_at DESC').page(params[:page]).per(12)
   end
 
   def show
     @post = Post.find(params[:id])
+    @postCreator = User.find(@post.user_id)
   end
 
   def new
@@ -53,30 +49,27 @@ class PostsController < ApplicationController
 
   def withtag
     if params[:tag]
-      @posts = Post.tagged_with(params[:tag]).order('created_at DESC')
+      @posts = Post.tagged_with(params[:tag]).order('created_at DESC').page(params[:page]).per(12)
       @tagname = params[:tag]
       @tag = Tag.find_by_name(params[:tag])
     end
   end
 
   def userfeed
-    @posts = []
+    idArr = Array.new
     allPosts = Post.order('created_at DESC')
-    userTags = current_user.subscribed_tags.map(&:name)
+    userTags = current_user.subscribed_tags.map(&:id)
     allPosts.each do |post|
-      postTags = post.tag_list.split(',')
-      userTags.each do |tag|
-        if postTags.include?(tag)
-          @posts.push(post)
-          break
-        end
+      post.tags.map(&:id).any? do |t|
+        idArr.push(post.id) if userTags.include?(t)
       end
     end
+    @posts = Post.where(id: idArr).order('created_at DESC').page(params[:page]).per(12)
   end
 
   def userposts
     @user = User.find(params[:id])
-    @posts = Post.where(user_id: @user.id).order('created_at DESC')
+    @posts = Post.where(user_id: @user.id).order('created_at DESC').page(params[:page]).per(12)
   end
 
   private
