@@ -41,3 +41,56 @@ main {
   bottom: 90px;
   right: 24px;
 }
+
+// took from materialize library
+
+.ppagination li {
+  display: inline-block;
+  font-size: 1.2rem;
+  padding: 0 10px;
+  line-height: 30px;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.ppagination li a {
+  color: #444;
+}
+
+.ppagination li.aactive a {
+  color: #fff;
+}
+
+.ppagination li.aactive {
+  background-color: #ee6e73;
+}
+
+.ppagination li.ddisabled a {
+  cursor: default;
+  color: #999;
+}
+
+.ppagination li i {
+  font-size: 2.2rem;
+  vertical-align: middle;
+}
+
+.ppagination li.ppages ul li {
+  display: inline-block;
+  float: none;
+}
+
+@media only screen and (max-width: 992px) {
+  .ppagination {
+    width: 100%;
+  }
+  .ppagination li.pprev,
+  .ppagination li.nnext {
+    width: 10%;
+  }
+  .ppagination li.ppages {
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}

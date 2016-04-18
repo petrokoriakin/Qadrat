@@ -1,9 +1,9 @@
 <% if page.current? %>
-  <li>
-    <%= content_tag :a, page, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
+  <li class="aactive">
+    <%= content_tag :a, page %>
   </li>
 <% else %>
-  <li>
-    <%= link_to page, url, remote: remote, rel: (page.next? ? 'next' : (page.prev? ? 'prev' : nil)) %>
+  <li class="waves-effect">
+    <%= link_to page, url, :rel => 'nnext', :remote => remote %>
   </li>
 <% end %>
