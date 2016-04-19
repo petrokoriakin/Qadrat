@@ -78,6 +78,8 @@ GEM
     execjs (2.6.0)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.7)
@@ -220,6 +222,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   dragonfly
+  friendly_id (~> 5.1)
   jbuilder (~> 2.0)
   jquery-rails
   kaminari (~> 0.16.3)

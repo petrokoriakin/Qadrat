@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :userposts, :withtag]
-  load_and_authorize_resource except: [:userposts, :withtag, :usernews]
+  load_and_authorize_resource except: [:userposts, :withtag, :userfeed]
 
   def index
     @posts = Post.order('created_at DESC').page(params[:page]).per(12)
@@ -8,6 +8,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    if request.path != post_path(@post)
+      redirect_to @post, status: :moved_permanently
+    end
     @postCreator = User.find(@post.user_id)
   end
 
@@ -74,6 +77,6 @@ class PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:title, :body, :image, :tag_list)
+      params.require(:post).permit(:title, :body, :image, :tag_list, :slug)
     end
 end

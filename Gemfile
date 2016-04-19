@@ -29,4 +29,4 @@ gem 'cancancan', '~> 1.10'
 gem 'materialize-sass'
 gem 'pg_search'
 gem 'kaminari', '~> 0.16.3'
-
+gem 'friendly_id', '~> 5.1'

@@ -4,7 +4,7 @@
           <div class="card">
             <div class="card-content">
               <span class="card-title">
-                <%= link_to excerpt(post.title, post.title[0], radius: 16), post %>
+                <%= link_to excerpt(post.title, post.title[0], radius: 16), post_path(post) %>
               </span>
               <p><%= post.created_at.strftime(" %B, %d, %Y") %></p>
             </div>

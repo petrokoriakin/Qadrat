@@ -1,4 +1,11 @@
 class User < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :username, use: [:slugged, :history, :finders]
+
+  def should_generate_new_friendly_id?
+    username_changed?
+  end
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
