@@ -28,6 +28,7 @@ main {
 #body {
    padding:10px;
    padding-bottom:90px;   /* Height of the footer */
+   background-color: #fafafa;
 }
 
 #footer {
@@ -94,3 +95,10 @@ main {
     white-space: nowrap;
   }
 }
+
+// styling placeholder
+
+::-webkit-input-placeholder {color: #c0392b;}
+:-moz-placeholder {color: #c0392b;}
+::-moz-placeholder {color: #c0392b;}
+:-ms-input-placeholder {color: #c0392b;} // opacity: 1;

@@ -22,8 +22,7 @@
           <div class="input-field">
             <%= form_tag results_path, method: :get, role: 'search' do %>
               <i class="material-icons prefix">search</i>
-              <%= label_tag :query, "Search..." %>
-              <%= text_field_tag :query, params[:query], id: "icon_prefix", class: 'validate' %>
+              <%= text_field_tag :query, params[:query], id: "icon_prefix", class: 'validate', placeholder: 'Search question or tag' %>
             <% end %>
           </div>
           <%= yield %>

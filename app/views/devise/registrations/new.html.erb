@@ -1,38 +1,37 @@
-<div id="page_wrapper">
-  <h2>Sign up</h2>
+<h4>Sign up</h4>
 
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
 
-    <div class="field">
-      <%= f.label :username %><br />
-      <%= f.text_field :username, autofocus: true %>
-    </div>
-    <br>
+  <div class="field">
+    <%= f.label :username %><br />
+    <%= f.text_field :username, autofocus: true %>
+  </div>
+  <br>
 
-    <div class="field">
-      <%= f.label :email %><br />
-      <%= f.email_field :email %>
-    </div>
-    <br>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email %>
+  </div>
+  <br>
 
-    <div class="field">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "off" %>
-    </div>
-    <br>
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+  <br>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
-    <br>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+  <br>
 
-    <div class="actions">
-      <%= f.submit "Sign up",  class: 'waves-effect waves-light btn' %>
-    </div>
-  <% end %>
-</div>
+  <div class="actions">
+    <%= f.submit "Sign up",  class: 'waves-effect waves-light btn' %>
+  </div>
+<% end %>
+
