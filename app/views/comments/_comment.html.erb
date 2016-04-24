@@ -1,8 +1,4 @@
-<% if comment.is_answer %>
-  <div class="row valign-wrapper light-green accent-1">
-<% else %>
-  <div class="row valign-wrapper ">
-<% end %>
+<div class="row valign-wrapper ">
   <div class="col s1">
     <% if User.find_by_id(comment.user_id).avatar_file_size.nil? %>
       <i class="fa fa-linux fa-5x" aria-hidden="true"></i>
@@ -13,14 +9,29 @@
   <div class="col s10">
     <span class="black-text">
       <%= link_to (User.find_by_id(comment.user_id)).username, user_path(comment.user_id) %>
-      <br><%= comment.body %> <br><br>
-      <% if can? :destroy, comment %>
-        <% if !comment.is_answer && comment.user_id != current_user.id %>
-          <%= link_to "Answer", [comment.post, comment],
-          method: :put, class: 'btn waves-effect waves-light btn deep-purple accent-2'%>
+      <%= time_ago_in_words(comment.created_at) %> ago
+      <br><br>
+      <%= comment.body %>
+      <br><br>
+      <% if comment.is_answer %>
+        <a class="waves-effect waves-light btn light-green accent-1 black-text black">
+          <i class="material-icons left">done</i>answer
+        </a>
+      <% end %>
+
+      <% if can? :update, @post %>
+        <% if !comment.is_answer && comment.user_id != current_user.id && @post.user_id == current_user.id %>
+          <%= link_to [comment.post, comment],
+          method: :put, class: 'btn waves-effect waves-light btn deep-purple accent-2' do %>
+            <i class="material-icons left">thumb_up</i>is answer
+          <% end %>
         <% end %>
-        <%= link_to 'Delete', [comment.post, comment], method: :delete,
-        class: 'btn waves-effect waves-light btn deep-purple accent-2', data: {confirm: "Are you sure?"}%>
+      <% end %>
+
+      <% if can? :destroy, comment %>
+        <%= link_to '<i class="material-icons left">delete</i>delete'.html_safe,
+        [comment.post, comment], method: :delete, data: {confirm: "Are you sure?"},
+        class: 'btn waves-effect waves-light btn deep-purple accent-2' %>
       <% end %>
     </span>
   </div>

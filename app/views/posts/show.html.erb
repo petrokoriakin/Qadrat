@@ -19,36 +19,47 @@
       <%= raw tags_list(@post) %>
     </p>
     <% if can? :update, @post %>
-      <%= link_to "Edit", edit_post_path(@post),
+      <%= link_to '<i class="material-icons left">mode_edit</i>edit'.html_safe, edit_post_path(@post),
       class: 'btn waves-effect waves-light btn deep-purple accent-2' %>
     <% end %>
     <% if can? :destroy, @post %>
-      <%= link_to "Delete", post_path(@post), class: 'btn waves-effect waves-light btn deep-purple accent-2', method: :delete, data: { confirm: "Are you sure?"} %>
+      <%= link_to '<i class="material-icons left">delete</i>delete'.html_safe, post_path(@post), class: 'btn waves-effect waves-light btn deep-purple accent-2', method: :delete, data: { confirm: "Are you sure?"} %>
     <% end %>
   </div>
-</div>
 
-<% if @post.comments.any? %>
+  <% if @post.comments.any? %>
   <br>
-  <ul class="collapsible" data-collapsible="accordion">
-    <li>
-      <div class="collapsible-header">
-        <i class="material-icons">comment</i>
-        <%= pluralize(@post.comments.size, "comment") %>
-      </div>
-      <div class="collapsible-body">
-        <div class="col s12 m8 offset-m2 l6 offset-l3">
-          <div class="card-panel grey lighten-5 z-depth-1">
-            <%= render @post.comments.order(:is_answer).reverse_order %>
+    <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header">
+          <i class="material-icons">comment</i>
+          <%= pluralize(@post.comments.size, "comment") %>
+          <i class="material-icons right">keyboard_arrow_down</i>
+        </div>
+        <div class="collapsible-body">
+          <div class="col s12 m8 offset-m2 l6 offset-l3">
+            <div class="card-panel grey lighten-5 z-depth-1">
+              <%= render @post.comments.order(:is_answer).reverse_order %>
+            </div>
           </div>
         </div>
-      </div>
-    </li>
-  </ul>
-<% else %>
-  <br>
-  <h4>No Comments</h4>
-<% end %>
+      </li>
+    </ul>
+  <% else %>
+    <br>
+    <!-- <h4>No Comments</h4> -->
+    <ul class="collapsible" data-collapsible="accordion">
+      <li>
+        <div class="collapsible-header">
+          <i class="material-icons">comment</i>
+          No comments
+        </div>
+      </li>
+    </ul>
+  <% end %>
+</div>
+
+
 
 <hr/>
 <% if user_signed_in? %>

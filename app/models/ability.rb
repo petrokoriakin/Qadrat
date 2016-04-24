@@ -11,7 +11,7 @@ class Ability
         can :create, [Post, Comment]
         can :update, Post, user_id: user.id
         can :update, User, id: user.id
-        can [:update, :destroy], Comment, user_id: user.id
+        can [:destroy], Comment, user_id: user.id
       elsif user && user.role?(:moderator)
         can :manage, [Post, Comment]
     end
