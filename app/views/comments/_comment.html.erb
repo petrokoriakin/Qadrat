@@ -17,10 +17,10 @@
       <% if can? :destroy, comment %>
         <% if !comment.is_answer && comment.user_id != current_user.id %>
           <%= link_to "Answer", [comment.post, comment],
-          method: :put, class: 'waves-effect waves-light btn'%>
+          method: :put, class: 'btn waves-effect waves-light btn deep-purple accent-2'%>
         <% end %>
         <%= link_to 'Delete', [comment.post, comment], method: :delete,
-              class: 'waves-effect waves-light btn', data: {confirm: "Are you sure?"}%>
+        class: 'btn waves-effect waves-light btn deep-purple accent-2', data: {confirm: "Are you sure?"}%>
       <% end %>
     </span>
   </div>

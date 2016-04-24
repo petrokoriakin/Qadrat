@@ -15,9 +15,6 @@
     <div id="container">
       <%= render 'shared/header' %>
       <div id="body">
-        <% flash.each do |name, msg| %>
-          <%= content_tag(:div, msg, class: "alert") %>
-        <% end %>
         <div class="container">
           <div class="input-field">
             <%= form_tag results_path, method: :get, role: 'search' do %>
@@ -25,6 +22,22 @@
               <%= text_field_tag :query, params[:query], id: "icon_prefix", class: 'validate', placeholder: 'Search question or tag' %>
             <% end %>
           </div>
+          <% if flash.any? %>
+            <ul class="collapsible yellow accent-1" data-collapsible="accordion">
+              <li>
+                <div class="collapsible-header yellow accent-1">
+                  <i class="material-icons">warning</i>
+                  <%= "Read it"%>
+                </div>
+
+                <div class="collapsible-body">
+                    <% flash.each do |name, msg| %>
+                      <p><%= msg %></p>
+                    <% end %>
+                </div>
+              </li>
+            </ul>
+          <% end %>
           <%= yield %>
         </div>
       </div>

@@ -10,16 +10,16 @@
                 <%= tag.name %>
               </span>
               <br>
-              <%= link_to "#{pluralize(tag.posts.size, "question")}", tag_path(tag)%>
+              <%= link_to "#{pluralize(tag.posts.size, "question")}", tag_path(tag.name)%>
             </div>
             <div class="card-action">
                <% if user_signed_in? %>
                 <% if current_user.is_following(current_user.id, tag.id) %>
                   <%= button_to "Unfollow", unfollow_tag_path(tag.name),
-                  method: :post, class: 'waves-effect waves-light btn' %>
+                  method: :post, class: 'btn waves-effect waves-light btn deep-purple accent-2' %>
                 <% else %>
                   <%= button_to "Follow", follow_tag_path(tag.name),
-                  method: :post, class: 'waves-effect waves-light btn' %>
+                  method: :post, class: 'btn waves-effect waves-light btn deep-purple accent-2' %>
                 <% end %>
               <% end %>
             </div>

@@ -1,7 +1,7 @@
 module PostsHelper
   def tags_size_valdiator(tagsSize)
    result = "+ "
-   if (tagsSize - 1)> 0
+   if (tagsSize - 1) > 0
     result += (tagsSize - 1).to_s + " more"
     result
    end

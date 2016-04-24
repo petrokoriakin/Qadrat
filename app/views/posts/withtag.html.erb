@@ -2,17 +2,16 @@
   <i class="fa fa-tag" aria-hidden="true"></i>
   <%= @tagname %>
 </h4>
-<hr>
-
+<br>
 <% if user_signed_in? %>
   <% if current_user.is_following(current_user.id, @tag.id) %>
-    <%= button_to "Unfollow", unfollow_tag_path(@tagname), method: :post, class: 'waves-effect waves-light btn' %>
+    <%= button_to "Unfollow", unfollow_tag_path(@tagname), method: :post, class: 'btn waves-effect waves-light btn deep-purple accent-2' %>
   <% else %>
-    <%= button_to "Follow", follow_tag_path(@tagname), method: :post, class: 'waves-effect waves-light btn' %>
+    <%= button_to "Follow", follow_tag_path(@tagname), method: :post, class: 'btn waves-effect waves-light btn deep-purple accent-2' %>
   <% end %>
 <% end %>
+<hr>
 
-<br>
 <%= render 'mainpage' %>
 
 <div class="row">

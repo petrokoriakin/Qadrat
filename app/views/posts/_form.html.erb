@@ -1,59 +1,60 @@
-<div class="row">
-  <%= form_for @post, html: { multipart: true } do |f| %>
+<div class="card">
+  <div class="card-content">
+    <%= form_for @post, html: { multipart: true } do |f| %>
 
-    <% if @post.errors.any? %>
-      <ul class="collapsible red lighten-4" data-collapsible="accordion">
-        <li>
-          <div class="collapsible-header red lighten-4">
-            <i class="material-icons">error_outline</i>
-            <%= pluralize(@post.errors.count, "error") %>
-          </div>
+      <% if @post.errors.any? %>
+        <ul class="collapsible red lighten-4" data-collapsible="accordion">
+          <li>
+            <div class="collapsible-header red lighten-4">
+              <i class="material-icons">error_outline</i>
+              <%= pluralize(@post.errors.count, "error") %>
+            </div>
 
-          <div class="collapsible-body">
-              <% @post.errors.full_messages.each do |msg| %>
-                <p><%= msg %></p>
-              <% end %>
-          </div>
-        </li>
-      </ul>
+            <div class="collapsible-body">
+                <% @post.errors.full_messages.each do |msg| %>
+                  <p><%= msg %></p>
+                <% end %>
+            </div>
+          </li>
+        </ul>
+      <% end %>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.label :title %> <br>
+          <%= f.text_field  :title %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+        <%= f.label :tag_list, "Tags (separated by commas)" %><br />
+        <%= f.text_field :tag_list %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s12">
+          <%= f.label :body %><br>
+          <%= f.text_area :body, class: 'materialize-textarea' %>
+        </div>
+      </div>
+
+      <%= f.submit "Create", class: 'btn btn waves-effect waves-light btn deep-purple accent-2' %>
+
+     <!--  <div class="fixed-action-btn horizontal click-to-toggle add_button">
+        <a class="btn-floating btn-large deep-purple accent-2">
+          <i class="large material-icons">add</i>
+        </a>
+        <ul>
+          <li>
+          <a class="btn-floating blue">
+          <i class="material-icons">add_a_photo</i></a>
+          </li>
+        </ul>
+      </div> -->
     <% end %>
-
-    <div class="row">
-      <div class="input-field col s12">
-        <%= f.label :title %> <br>
-        <%= f.text_field  :title %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s12">
-      <%= f.label :tag_list, "Tags (separated by commas)" %><br />
-      <%= f.text_field :tag_list %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="input-field col s12">
-        <%= f.label :body %><br>
-        <%= f.text_area :body, class: 'materialize-textarea' %>
-      </div>
-    </div>
-
-    <%= f.submit "Create", class: 'btn waves-effect waves-light' %>
-
-    <div class="fixed-action-btn horizontal click-to-toggle add_button">
-      <a class="btn-floating btn-large deep-purple accent-2">
-        <i class="large material-icons">add</i>
-      </a>
-      <ul>
-        <li>
-        <a class="btn-floating blue">
-        <i class="material-icons">add_a_photo</i></a>
-        </li>
-      </ul>
-    </div>
-
-  <% end %>
+  </div>
 </div>
 
 <script>
