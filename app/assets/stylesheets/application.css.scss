@@ -3,11 +3,11 @@
  *= require_sel
  */
 
-@import 'normalize';
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "materialize";
 @import "materialize/extras/nouislider";
+@import 'normalize';
 
 html,
 body {
