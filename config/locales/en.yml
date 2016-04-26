@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  incorrect_data: 'Data is not correct'
+  incorrect_value: 'Value is not correct'
+  exchange_rate:
+    date_restriction: 'You can not get info about exchange rates in specified year'
+    no_rate_info: 'No info for conversion'

@@ -1,19 +1,13 @@
 default: &default
-  adapter: postgresql
+  adapter: sqlite3
   encoding: unicode
   pool: 5
 
 development:
   <<: *default
-  database: Blog_development
+  database: db/development.sqlite
   username: malworm
 
 test:
   <<: *default
-  database: Blog_test
-
-production:
-  <<: *default
-  database: Blog_production
-  username: malworm
-  password: <%= ENV['BLOG_DATABASE_PASSWORD'] %>
+  database: db/development.sqlite

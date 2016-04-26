@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160419173829) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20160426221915) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -25,7 +22,16 @@ ActiveRecord::Schema.define(version: 20160419173829) do
     t.boolean  "is_answer",  default: false
   end
 
-  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id"
+
+  create_table "exchange_rates", force: :cascade do |t|
+    t.date     "period",     null: false
+    t.decimal  "rate",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "exchange_rates", ["period"], name: "index_exchange_rates_on_period", unique: true
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -35,10 +41,10 @@ ActiveRecord::Schema.define(version: 20160419173829) do
     t.datetime "created_at"
   end
 
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
@@ -53,7 +59,7 @@ ActiveRecord::Schema.define(version: 20160419173829) do
     t.string   "slug"
   end
 
-  add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+  add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true
 
   create_table "subscriptions", force: :cascade do |t|
     t.integer  "tag_id"
@@ -62,8 +68,8 @@ ActiveRecord::Schema.define(version: 20160419173829) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "subscriptions", ["tag_id"], name: "index_subscriptions_on_tag_id", using: :btree
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
+  add_index "subscriptions", ["tag_id"], name: "index_subscriptions_on_tag_id"
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -72,8 +78,8 @@ ActiveRecord::Schema.define(version: 20160419173829) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "taggings", ["post_id"], name: "index_taggings_on_post_id", using: :btree
-  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["post_id"], name: "index_taggings_on_post_id"
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id"
 
   create_table "tags", force: :cascade do |t|
     t.string   "name"
@@ -108,15 +114,10 @@ ActiveRecord::Schema.define(version: 20160419173829) do
     t.string   "slug"
   end
 
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["slug"], name: "index_users_on_slug", unique: true, using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["slug"], name: "index_users_on_slug", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
 
-  add_foreign_key "comments", "posts"
-  add_foreign_key "subscriptions", "tags"
-  add_foreign_key "subscriptions", "users"
-  add_foreign_key "taggings", "posts"
-  add_foreign_key "taggings", "tags"
 end

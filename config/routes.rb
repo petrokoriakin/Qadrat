@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get 'subscriptions/unfollow_tag'
 
   devise_for :users
+  
+  get 'exchange_rate' => 'exchange_rate#index'
+  get 'exchange_rate/convert' => 'exchange_rate#convert'
 
   resources :posts do
     resources :comments

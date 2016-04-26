@@ -1,0 +1,17 @@
+<% if flash[:notice] %>
+    <b><%= flash[:notice] %></b>
+<% end %>
+
+<%= form_for :conversion, method: :get, url: exchange_rate_convert_path do |f| %>
+    <%= f.label 'Value' %>
+    <%= f.text_field :value, value: params[:conversion][:value] %>
+    <br>
+    <%= f.label 'Date' %>
+    <%= f.text_field :date, value: params[:conversion][:date] %>
+    <br>
+    <%= f.submit 'Convert' %>
+<% end %>
+
+<% if @result %>
+    RESULT: <%= @result.round(2) %>
+<% end %>
